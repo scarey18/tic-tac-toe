@@ -1,0 +1,1 @@
+A simple command-line tic-tac-toe game played between two humans. AI might be added later.
