@@ -7,12 +7,11 @@ def play_game():
 	while check_for_moves(board):
 		print_board(board)
 
-		answer = take_turn(turn, board)
+		take_turn(turn, board)
 		if check_for_victory(board):
 			print("\nCongrats %s, you win!!" % turn)
 			print_board(board)
 			if not play_again():
-				print("Ok byyyye :(")
 				return
 
 		if turn == 'X':
@@ -22,8 +21,7 @@ def play_game():
 
 	print("\n It's a tie!")
 	print_board(board)
-	if not play_again():
-		print("Ok byyye :(")
+	play_again()
 
 def check_for_moves(board):
 	if ' ' in (board[space] for space in board.keys()):
@@ -55,7 +53,7 @@ def check_for_victory(board):
 
 def take_turn(turn, board):
 	answer = input("%s, it's your turn. Input the name of an empty space to place your marker: " % turn)
-	if answer not in board.keys():
+	if answer.lower() not in board.keys():
 		print("That's not a valid space! Try again.")
 		take_turn(turn, board)
 	elif board[answer.lower()] != ' ':
@@ -63,7 +61,6 @@ def take_turn(turn, board):
 		take_turn(turn, board)
 	else:
 		board[answer.lower()] = turn
-		return answer.lower()
 
 
 def play_again():
@@ -71,6 +68,7 @@ def play_again():
 	if answer == 'y' or answer == 'Y':
 		play_game()
 	elif answer == 'n' or answer == 'N':
+		print("Ok byyyye :(")
 		return False
 	else:
 		print("\nThat's not one of the options!")
